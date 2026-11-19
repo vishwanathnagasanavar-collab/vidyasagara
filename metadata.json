@@ -1,0 +1,6 @@
+{
+  "name": "Vidyasagara Printers",
+  "description": "Print Order, Job Card, Dispatch & Party Ledger Desktop Software for Vidyasagara Printers.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

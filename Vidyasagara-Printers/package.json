@@ -1,0 +1,39 @@
+{
+  "name": "vidyasagara-printers",
+  "version": "1.0.0",
+  "description": "Vidyasagara Printers - Print Order, Job Card, Despatch & Party Ledger Desktop Software",
+  "author": "Vidyasagara Printers",
+  "license": "MIT",
+  "main": "dist-electron/main.js",
+  "scripts": {
+    "dev": "vite --port 5173",
+    "build:ui": "vite build",
+    "build:electron": "tsc -p tsconfig.electron.json",
+    "build": "npm run build:ui && npm run build:electron",
+    "start": "npm run build && electron .",
+    "package:win": "npm run build && electron-builder --win nsis portable --x64",
+    "package:nsis": "npm run build && electron-builder --win nsis --x64",
+    "package:portable": "npm run build && electron-builder --win portable --x64",
+    "postinstall": "node build/patch-nsis-linux.mjs",
+    "lint": "tsc --noEmit && tsc -p tsconfig.electron.json --noEmit"
+  },
+  "dependencies": {
+    "lucide-react": "^0.546.0",
+    "react": "^19.0.1",
+    "react-dom": "^19.0.1",
+    "sql.js": "^1.13.0"
+  },
+  "devDependencies": {
+    "@tailwindcss/vite": "^4.1.4",
+    "@types/node": "^22.14.0",
+    "@types/react": "^19.0.10",
+    "@types/react-dom": "^19.0.4",
+    "@vitejs/plugin-react": "^4.3.4",
+    "electron": "^35.1.5",
+    "electron-builder": "^26.0.12",
+    "png-to-ico": "^2.1.8",
+    "sharp": "^0.34.1",
+    "tailwindcss": "^4.1.4",
+    "typescript": "^5.8.2"
+  }
+}

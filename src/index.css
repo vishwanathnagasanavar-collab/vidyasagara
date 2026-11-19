@@ -1,0 +1,73 @@
+@import "tailwindcss";
+
+:root {
+  --vp-orange: #F26522;
+  --vp-orange-hover: #DC5516;
+  --vp-orange-soft: #FFF4EE;
+  --vp-surface: #FFFFFF;
+  --vp-canvas: #F8F9FA;
+  --vp-border: #E5E7EB;
+  --vp-border-strong: #D1D5DB;
+  --vp-text: #374151;
+  --vp-text-dark: #1F2937;
+  --vp-text-muted: #6B7280;
+  --vp-red-alert: #DC2626;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  font-family: 'Plus Jakarta Sans', 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
+  background-color: var(--vp-canvas);
+  color: var(--vp-text);
+  font-size: 13px;
+  -webkit-font-smoothing: antialiased;
+}
+
+.tabular-nums {
+  font-variant-numeric: tabular-nums;
+}
+
+.font-mono-num {
+  font-family: 'JetBrains Mono', monospace;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Crisp desktop grid scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #F3F4F6;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #CBD5E1;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #94A3B8;
+}
+
+/* Print Job Card Support */
+@media print {
+  .no-print {
+    display: none !important;
+  }
+  .print-only {
+    display: block !important;
+  }
+  body {
+    background: #ffffff !important;
+  }
+}

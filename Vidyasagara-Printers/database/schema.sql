@@ -1,0 +1,78 @@
+PRAGMA foreign_keys = ON;
+
+CREATE TABLE IF NOT EXISTS branches (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  code TEXT UNIQUE NOT NULL,
+  name TEXT NOT NULL,
+  city TEXT NOT NULL,
+  phone TEXT DEFAULT '',
+  is_active INTEGER NOT NULL DEFAULT 1
+);
+
+CREATE TABLE IF NOT EXISTS users (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  username TEXT UNIQUE NOT NULL,
+  full_name TEXT NOT NULL,
+  role TEXT NOT NULL DEFAULT 'Operator',
+  branch_code TEXT NOT NULL DEFAULT 'JPB',
+  phone TEXT DEFAULT '',
+  is_active INTEGER NOT NULL DEFAULT 1,
+  created_at TEXT NOT NULL DEFAULT (datetime('now'))
+);
+
+CREATE TABLE IF NOT EXISTS products (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  code TEXT UNIQUE NOT NULL,
+  name TEXT NOT NULL,
+  category TEXT NOT NULL DEFAULT 'Commercial Print',
+  default_rate REAL NOT NULL DEFAULT 0,
+  unit TEXT NOT NULL DEFAULT 'Lot',
+  gst_percent REAL NOT NULL DEFAULT 18
+);
+
+CREATE TABLE IF NOT EXISTS customers (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  name TEXT NOT NULL,
+  phone TEXT NOT NULL,
+  branch_code TEXT NOT NULL DEFAULT 'JUSTPRINT',
+  order_prefix TEXT NOT NULL DEFAULT 'JPB',
+  city TEXT DEFAULT '',
+  gstin TEXT DEFAULT '',
+  credit_limit REAL NOT NULL DEFAULT 50000,
+  created_at TEXT NOT NULL DEFAULT (datetime('now'))
+);
+
+CREATE TABLE IF NOT EXISTS orders (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  ord_no TEXT UNIQUE NOT NULL,
+  customer_id INTEGER NOT NULL REFERENCES customers(id) ON DELETE RESTRICT,
+  order_date TEXT NOT NULL,
+  qty INTEGER NOT NULL DEFAULT 1,
+  rate REAL NOT NULL DEFAULT 0,
+  amount REAL NOT NULL DEFAULT 0,
+  product_code TEXT NOT NULL,
+  batch_no TEXT NOT NULL,
+  br_transfer INTEGER NOT NULL DEFAULT 0,
+  br_rcvd INTEGER NOT NULL DEFAULT 0,
+  br_despatch INTEGER NOT NULL DEFAULT 0,
+  rcvd_amt REAL NOT NULL DEFAULT 0,
+  bal_amt REAL NOT NULL DEFAULT 0,
+  job_notes TEXT DEFAULT '',
+  branch_code TEXT NOT NULL DEFAULT 'JPB',
+  created_by TEXT DEFAULT 'Admin',
+  created_at TEXT NOT NULL DEFAULT (datetime('now'))
+);
+
+CREATE TABLE IF NOT EXISTS receipts (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  ref_id TEXT UNIQUE NOT NULL,
+  order_id INTEGER NOT NULL REFERENCES orders(id) ON DELETE CASCADE,
+  customer_id INTEGER NOT NULL REFERENCES customers(id) ON DELETE CASCADE,
+  receipt_date TEXT NOT NULL,
+  notes TEXT DEFAULT '',
+  total_rcpt REAL NOT NULL DEFAULT 0,
+  adjusted_amt REAL NOT NULL DEFAULT 0,
+  pay_mode TEXT NOT NULL DEFAULT 'Cash',
+  user_name TEXT NOT NULL DEFAULT 'Vishwanath',
+  created_at TEXT NOT NULL DEFAULT (datetime('now'))
+);

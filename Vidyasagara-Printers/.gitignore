@@ -1,0 +1,8 @@
+node_modules/
+dist/
+dist-electron/
+release/*.7z
+release/win-unpacked/
+*.db
+*.tmp
+.DS_Store

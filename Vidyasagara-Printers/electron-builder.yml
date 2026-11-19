@@ -1,0 +1,52 @@
+appId: com.vidyasagaraprinters.desktop
+productName: Vidyasagara Printers
+copyright: Copyright © 2026 Vidyasagara Printers
+compression: normal
+directories:
+  buildResources: build
+  output: release
+
+files:
+  - dist/**/*
+  - dist-electron/**/*
+  - database/**/*
+  - build/icon.png
+  - build/icon.ico
+  - node_modules/sql.js/dist/sql-wasm.js
+  - node_modules/sql.js/dist/sql-wasm.wasm
+  - node_modules/sql.js/package.json
+  - package.json
+
+asarUnpack:
+  - node_modules/sql.js/dist/sql-wasm.wasm
+
+win:
+  icon: build/icon.ico
+  target:
+    - target: nsis
+      arch:
+        - x64
+    - target: portable
+      arch:
+        - x64
+  requestedExecutionLevel: asInvoker
+  signAndEditExecutable: true
+
+nsis:
+  artifactName: Vidyasagara-Printers-Setup.exe
+  oneClick: false
+  perMachine: false
+  allowElevation: true
+  allowToChangeInstallationDirectory: true
+  createDesktopShortcut: true
+  createStartMenuShortcut: true
+  shortcutName: Vidyasagara Printers
+  uninstallDisplayName: Vidyasagara Printers
+  installerIcon: build/icon.ico
+  uninstallerIcon: build/icon.ico
+  installerHeaderIcon: build/icon.ico
+  deleteAppDataOnUninstall: false
+
+portable:
+  artifactName: Vidyasagara-Printers-Portable.exe
+  useZip: true
